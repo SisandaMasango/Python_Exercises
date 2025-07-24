@@ -55,66 +55,58 @@ stages = [r'''
       |
 =========
 ''']
-word_list = ["aardvark", "baboon", "camel"]
-
-
+word_list = ["cat", "vat", "dog"]
+lives = 6
 chosen_word = random.choice(word_list)
-print(chosen_word)
+# print(chosen_word)
 
 placeholder = ""
 word_length = len(chosen_word)
 for position in range(word_length):
     placeholder += "_"
-print(placeholder)
+print("Word to guess: " + placeholder)
 
 game_over = False
 correct_letters = []
-lives = 6
+guessed_letters = []
+
+
 
 while not game_over:
+
+    print(f"****************************<???>/{lives} LIVES LEFT****************************")
     guess = input("Guess a letter: ").lower()
-
-
     display = ""
+    if guess not in guessed_letters:
+        guessed_letters.append(guess)
+        # print(guessed_letters)
 
-    for letter in chosen_word:
-        if letter == guess:
-            display += letter
-            correct_letters.append(guess)
-        elif letter in correct_letters:
-            display += letter
-        else:
-            display += "_"
+        for letter in chosen_word:
+            if letter == guess:
+                display += letter
+                correct_letters.append(guess)
+            elif letter in correct_letters:
+                display += letter
+            else:
+                display += "_"
 
-    print(display)
+        print("Word to guess: " + display)
+
+        if guess not in chosen_word:
+            print(f"You guessed {guess} and it is not in the chosen word, You lose a life")
+            lives -= 1
+
+            if lives == 0:
+                game_over = True
+                print(f"You were trying to guess {chosen_word}")
+                print(f"***********************IT WAS <{chosen_word}>! YOU LOSE**********************")
+
+        if "_" not in display :
+            game_over = True
+            print("****************************YOU WIN****************************")
+
+    else:
+        print(f" {guess } was already guessed, try another letter")
 
     
-
-    if lives <= 0:
-        game_over = True
-        print("You lose.")
-    elif guess not in chosen_word:
-        lives = lives - 1
-    elif  "_" not in display:
-        game_over = True
-        print("You win.")
-    else:
-        continue
-
-
-    if lives == 6:
-        print(stages[6])
-    elif lives == 5:
-        print(stages[5])
-    elif lives == 4:
-        print(stages[4])
-    elif lives == 3:
-        print(stages[3])
-    elif lives == 2:
-        print(stages[2])
-    elif lives == 1:
-        print(stages[1])
-    elif lives == 0:
-        print(stages[0])
-    else:
-        continue
+    print(stages[lives])
