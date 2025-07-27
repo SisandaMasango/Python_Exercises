@@ -1,0 +1,18 @@
+comprehension is a concise way to create a new list(or set, dictionary)
+from an existing iterable like a list, range, string, usually in one line.
+instead of using a full for loop, you compress it into an expression.
+
+regular way:
+squares = []
+for i in range(5):
+    squares.append(i*i)
+print(squares) 
+[0, 1, 4, 9, 16]
+
+list comprehension but same code:
+squares = [i * i for i in range(5)]
+print(squares)
+[0, 1, 4, 9, 16]
+
+basic syntax:
+[expression for item, in iterable if condition]

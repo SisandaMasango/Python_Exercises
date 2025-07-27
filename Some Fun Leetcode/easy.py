@@ -1,7 +1,6 @@
-x = 121
-x_str = str(x)
-x_len = len(str(x))
-x_list = [x]
+x = input("Choose a number: ")
+# x_str = str(x)
+# x_len = len(x_str)
 reverse = ""
 
 
@@ -11,9 +10,9 @@ reverse = ""
 # print(x_len[-3])
 
 
-for i in range(1, x_len + 1):
-    reverse += x_str[-i]
-if x_str == reverse:
+for i in range(1, len(x) + 1):
+    reverse += x[-i]
+if x == reverse:
     print("Palindrome")
 else:
     print("Not Palindrome")
