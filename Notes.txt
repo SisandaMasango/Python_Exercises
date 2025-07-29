@@ -1,0 +1,24 @@
+The modulo operator (%) in Python is a fundamental arithmetic operator used to determine the remainder of a division operation. 
+What is the Modulo Operator in Python?
+The modulo operator (%) computes the remainder of the division between two numbers. Given two numbers a (dividend) and b (divisor), the modulo operation returns the remainder when a is divided by b.
+Mathematical background
+Modulo has its roots in modular arithmetic, a system of arithmetic for integers where numbers "wrap around" after reaching a certain value (modulus). 
+It is widely used in cryptography, hashing, and cyclic computations.
+Think of a 12-hour clock: after 12, instead of continuing to 13, we wrap back to 1. This is essentially modular arithmetic with a modulus of 12:
+
+13 % 12 = 1, meaning 13 o’clock corresponds to 1 o’clock in a 12-hour format.
+
+remainder = dividend % divisor
+
+# Basic modulo operations
+print(7 % 3)    #1 
+print(15 % 4)   #3
+print(20 % 5)   #0
+
+# Examples with negative integers
+print(-10 % 3)  #2
+dividend = divisor * quotient + remainder
+3 goes into -10 -4times because 3*-4 = -12, which is less than -10
+-10 - (-12) = 2
+print(10 % -3)  #-2
+print(-10 % -3) #-1

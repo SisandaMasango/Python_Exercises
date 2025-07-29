@@ -1,28 +1,13 @@
-def calculate_love_score(name1, name2):
-    name_one = name1.upper()
-    name_two = name2.upper()
-    total_for_true = ""
-    total_for_love = ""
+def simple_hash(text, modulus=1000000007):
+    """A very simple hash function using modulo."""
+    hash_value = 0
+    for char in text:
+        # Combine the current hash with the character's Unicode code point
+        hash_value = (hash_value * 31 + ord(char)) % modulus
+    return hash_value
 
-    for i in name_one:
-        for j in "TRUE":
-            if i == j:
-                total_for_true += i
-        for k in "LOVE":
-            if i == k:
-                total_for_love += i 
-          
-    
-    for h in name_two:
-        for m in "TRUE":
-            if h == m:
-                total_for_true += h
-        for n in "LOVE":
-            if h == n:
-                total_for_love += n
-    total = (str(len(total_for_true)) + str(len(total_for_love)))
-    print(total)
-   
-                
-
-calculate_love_score("Thandoluhle","Lisa")
+# Test with some strings
+print(simple_hash("hello"))  # Output a number between 0 and 1000000006
+print(simple_hash("world"))
+print(simple_hash("hello world"))
+print(simple_hash("こんにちは"))  
