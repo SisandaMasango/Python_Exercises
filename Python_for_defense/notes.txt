@@ -1,0 +1,79 @@
+- Python's built in scalar(int, float, bool) and text type(str, bytes) hide a great deal of subtle behaviour that becomes important when you start
+manipulating raw network data, generating shellcode or processing large log files.
+- Mastering those details early saves time later when your scrips misbehaves under stress.
+- in essence, Don’t treat Python like a purely high-level language—understanding its low-level behaviors with scalars and text types
+ will save you from hard-to-debug errors later.
+
+ Why it matters in Security/Networking
+ In cybersecurity, forensics, or networking:
+
+A wrongly encoded byte can make your payload fail.
+
+A hidden null byte can break your shellcode.
+
+Unicode normalization might cause bypasses.
+
+When parsing logs or PCAP files, you need byte-perfect control.
+
+
+ What I should master early.
+
+ | Concept                               | Why it matters                                             |
+| ------------------------------------- | ---------------------------------------------------------- |
+| `str` vs `bytes`                      | Crucial when reading/writing files or sockets              |
+| `.encode()` / `.decode()`             | Encoding mismatches cause subtle bugs                      |
+| `bytearray` vs `bytes`                | One is mutable, the other is not                           |
+| Bitwise operations                    | Essential for crafting or decoding protocols               |
+| `struct` module                       | Converts Python values to C-style structs                  |
+| `int.to_bytes()` / `int.from_bytes()` | Manipulating raw integers and converting them for networks |
+| File reading modes (`'rb'` vs `'r'`)  | Wrong mode → corrupted binary or bad output                |
+| Memory usage of strings and buffers   | Affects performance for large-scale log processing         |
+
+n = 2_147_483_648          
+print(n.bit_length()) tell you how many bits are needed to represent n in binary - this n in binary is 10000000000000000000000000000000
+which is 32 bits     
+print(hex(n)) this converts the number to hexadecimal(base 16), a compact way to show binary data
+2147483648 to 0x80000000 0x means 'hex' and 80 is 1 000 000 >  0x80000000              
+print(n.to_bytes(4, 'big')) #use 4 bytes(32 bits) 'big' use big-endian byte order(most significant byte first)
+
+.bit_length - How many bits are needed to store the numbers
+hex(n) - Hex representation (base 16)
+.to_bytes(n, 'big') - converts integer to a byte sequence(binary form)
+
+Why it matters in Security?
+- This is how you manipulate raw memory or send binary data over a socket
+- important in packet crafting, malware analysis and forensics, etc
+
+- understanding low-level python and high level code is a huge step in system programming, security and reverse engineering
+- you convert high level into low level code and manipulate it, high level coders would not be able to see what you did 
+because their focus in high level code.
+- this is used in 
+    exploits and shellcode
+    packet manipulation
+    steganography (hiding data)
+    malware evasion
+    Binary file tempering
+    Encoding data to bypass filters.
+
+| High-Level Python      | Low-Level Reality                                       |
+| ---------------------- | ------------------------------------------------------- |
+| `n = 1337`             | Turns into bytes: `b'\x05\x39'`                         |
+| `print("Hello")`       | Actually sends: `48 65 6C 6C 6F` in ASCII               |
+| `password = "admin"`   | Can be turned into bytes, hex, or obfuscated            |
+| JSON, strings, numbers | All get **encoded into raw bytes** in memory or on disk |
+
+Why hide or manipulate data at the low level?
+To:
+
+Hide intent (e.g., malware hiding its commands)
+
+Bypass detection (e.g., WAFs, AVs)
+
+Inject custom binary payloads (e.g., in exploits)
+
+Communicate over custom protocols
+
+Process raw logs or memory dumps
+
+message = "GET /index.html HTTP/1.1\r\n\r\n" ----- high level
+b'47 45 54 20 2F 69 6E 64 65 78 2E 68 74 6D 6C 20 48 54 54 50 2F 31 2E 31 0D 0A 0D 0A' --- what is sent over wire
