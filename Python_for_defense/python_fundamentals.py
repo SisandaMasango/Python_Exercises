@@ -28,11 +28,35 @@ def almost_equal(a, b, rel_tol=1e-9, abs_tol=0.0):
 
 #So it returns True
 
-payload = b"\x90" * 16 + b"/xcc"
-mutable = bytearray(payload)
-mutable[0] = 0xcc
-view = memoryview(mutable)[1:5]
-print(view)
-print(mutable[0])
-print(bin(0x100471b40))
-print(hex(0b100000000010001110001101101000000))
+# payload = b"\x90" * 16 + b"/xcc"
+# mutable = bytearray(payload)
+# mutable[0] = 0xcc
+# view = memoryview(mutable)[1:5]
+# print(view)
+# print(mutable[0])
+# print(bin(0x100471b40))
+# print(hex(0b100000000010001110001101101000000))
+
+#XOR Basics
+#XOR(exclusive OR) is a bitwise operation: a ^ b
+#if two bits are the same, the result is 0; if different, the result is 1.
+
+"""
+data: a mutable bytearray.
+key: an integer (between 0 and 255).
+XOR each byte in data with key, and modify data in place
+"""
+def xor_bytes(data: bytearray, key: int):
+    for i in range(len(data)):
+        data[i] ^= key
+
+
+original = bytearray(b"hello")
+key = 42
+
+print("Before XOR:", original)
+xor_bytes(original, key)
+print("After XOR: ", original)
+#To decrypt:
+xor_bytes(original, key)
+print("Decrypt: ", original)

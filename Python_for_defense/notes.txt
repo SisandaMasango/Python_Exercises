@@ -77,3 +77,6 @@ Process raw logs or memory dumps
 
 message = "GET /index.html HTTP/1.1\r\n\r\n" ----- high level
 b'47 45 54 20 2F 69 6E 64 65 78 2E 68 74 6D 6C 20 48 54 54 50 2F 31 2E 31 0D 0A 0D 0A' --- what is sent over wire
+
+What is Byte-oriented types 
+refers to data types that store and manipulate sequences of bytes(8-bit values ranging from 0-255)
